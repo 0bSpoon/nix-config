@@ -1,6 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
-{
+let
+  unstable = import inputs.nixpkgs-unstable {
+    system = pkgs.system;
+    config = pkgs.config;
+  };
+in {
   home.username = "bspoon";
   home.homeDirectory = "/home/bspoon";
 
@@ -29,7 +34,10 @@
     gnome-tweaks
 
     # development tools
-    vscode
+    unstable.vscode
+
+    # productivity tools
+    super-productivity
 
     # archives
     zip
@@ -102,6 +110,28 @@
       init = {
         defaultBranch = "main";
       };
+    };
+  };
+
+  xdg.autostart.enable = true;
+  programs.keepassxc = {
+    enable = true;
+    autostart = true;
+  };
+
+  programs.obsidian = {
+    enable = true;
+  };
+
+  programs.claude-code = {
+    enable = true;
+    package = unstable.claude-code;
+  };
+
+  programs.ghostty = {
+    enable = true;
+    settings = {
+      font-family = "JetBrainsMonoNL Nerd Font";
     };
   };
 
