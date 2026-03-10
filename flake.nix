@@ -12,19 +12,31 @@
 
   outputs =
     { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
+    let
+      homeManagerModule = {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.extraSpecialArgs = { inherit inputs; };
+        home-manager.users.bspoon = import ./common/home.nix;
+      };
+    in
     {
       nixosConfigurations.vm-nixos-test = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
-        modules = [ 
-          ./configuration.nix
+        modules = [
+          ./hosts/vm-nixos-test/configuration.nix
           home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.bspoon = import ./home.nix;
-          }
-          ];
+          homeManagerModule
+        ];
+      };
+
+      nixosConfigurations.targon = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/targon/configuration.nix
+          home-manager.nixosModules.home-manager
+          homeManagerModule
+        ];
       };
     };
 }
