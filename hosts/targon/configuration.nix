@@ -14,8 +14,8 @@
   fileSystems."/persist".neededForBoot = true;
 
   services.btrfs.autoScrub = {
-  enable = true;
-  interval = "monthly";
-  fileSystems = [ "/" ];
+    enable = true;
+    interval = "monthly";
+    fileSystems = [ "/" ];
   };
 }
