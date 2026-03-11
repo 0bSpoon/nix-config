@@ -121,4 +121,14 @@
     };
     openFirewall = true;
   };
+
+  
+  fileSystems."/var/log".neededForBoot = true;
+  fileSystems."/persist".neededForBoot = true;
+
+  services.btrfs.autoScrub = {
+    enable = true;
+    interval = "monthly";
+    fileSystems = [ "/" ];
+  };
 }

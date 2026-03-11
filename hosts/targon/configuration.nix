@@ -9,13 +9,4 @@
   ];
   networking.hostName = "targon";
   system.stateVersion = "25.11";
-
-  fileSystems."/var/log".neededForBoot = true;
-  fileSystems."/persist".neededForBoot = true;
-
-  services.btrfs.autoScrub = {
-    enable = true;
-    interval = "monthly";
-    fileSystems = [ "/" ];
-  };
 }
