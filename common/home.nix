@@ -131,7 +131,7 @@ in {
   programs.ghostty = {
     enable = true;
     settings = {
-      font-family = "JetBrainsMonoNL Nerd Font";
+      font-family = "JetBrainsMono Nerd Font";
     };
   };
 
