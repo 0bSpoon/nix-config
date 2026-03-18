@@ -129,6 +129,8 @@ in {
       ];
       userSettings = {
         "terminal.integrated.sendKeybindingsToShell" = true;
+        "editor.fontFamily" = "'Monaspace Neon NF', 'IBM Plex Sans JP', monospace";
+        "terminal.integrated.fontFamily" = "'Monaspace Neon NF', 'IBM Plex Sans JP', monospace";
       };
     };
   };
@@ -141,7 +143,7 @@ in {
   programs.ghostty = {
     enable = true;
     settings = {
-      font-family = "JetBrainsMono Nerd Font";
+      font-family = ["Monaspace Neon NF" "IBM Plex Sans JP"];
       theme = "Kanagawa Wave";
     };
   };
