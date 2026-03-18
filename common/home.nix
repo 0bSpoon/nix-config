@@ -33,9 +33,6 @@ in {
     # gnome related
     gnome-tweaks
 
-    # development tools
-    unstable.vscode
-
     # productivity tools
     super-productivity
 
@@ -50,7 +47,7 @@ in {
     jq # A lightweight and flexible command-line JSON processor
     yq-go # yaml processor https://github.com/mikefarah/yq
     eza # A modern replacement for ‘ls’
-    fzf # A command-line fuzzy finder
+    ghq # Manage remote repository clones
 
     # networking tools
     mtr # A network diagnostic tool
@@ -123,6 +120,15 @@ in {
     enable = true;
   };
 
+  programs.vscode = {
+    enable = true;
+    package = unstable.vscode;
+    extensions = with pkgs.vscode-extensions; [
+      anthropic.claude-code
+      jnoortheen.nix-ide
+    ];
+  };
+
   programs.claude-code = {
     enable = true;
     package = unstable.claude-code;
@@ -132,7 +138,24 @@ in {
     enable = true;
     settings = {
       font-family = "JetBrainsMono Nerd Font";
+      theme = "Kanagawa Wave";
     };
+  };
+
+  programs.tmux = {
+    enable = true;
+  };
+
+  programs.google-chrome = {
+    enable = true;
+  };
+
+  programs.gh-dash = {
+    enable = true;
+  };
+
+  programs.fzf = {
+    enable = true;
   };
 
   programs.bash = {
