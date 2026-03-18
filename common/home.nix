@@ -127,6 +127,9 @@ in {
       anthropic.claude-code
       jnoortheen.nix-ide
     ];
+    userSettings = {
+      "terminal.integrated.sendKeybindingsToShell" = true;
+    };
   };
 
   programs.claude-code = {
