@@ -58,6 +58,21 @@
     pulse.enable = true;
   };
 
+  services.pipewire.wireplumber.extraConfig."disable-momentum4-mic" = {
+    "monitor.alsa.rules" = [
+      {
+        matches = [
+          { "node.name" = "alsa_input.usb-Sonova_Consumer_Hearing_MOMENTUM_4_30284BD06725A9AB3C08-01.mono-fallback"; }
+        ];
+        actions = {
+          update-props = {
+            "node.disabled" = true;
+          };
+        };
+      }
+    ];
+  };
+
   # Define a user account. Don't forget to set a password with 'passwd'.
   users.users.bspoon = {
     isNormalUser = true;
@@ -81,6 +96,7 @@
     wget
     neovim
     git
+    gh
   ];
 
   fonts.packages = with pkgs; [
@@ -94,21 +110,31 @@
     ipafont
   ];
 
-  fonts.fontconfig.defaultFonts = {
-    monospace = [
-      "Noto Sans Mono"
-      "Noto Sans Mono CJK JP"
-    ];
-
-    sansSerif = [
-      "Noto Sans"
-      "Noto Sans CJK JP"
-    ];
-
-    serif = [
-      "Noto Serif"
-      "Noto Serif CJK JP"
-    ];
+  fonts.fontconfig = {
+    antialias = true;
+    hinting = {
+      enable = true;
+      autohint = false;
+      style = "slight";
+    };
+    subpixel = {
+      rgba = "rgb";
+      lcdfilter = "default";
+    };
+    defaultFonts = {
+      monospace = [
+        "Noto Sans Mono"
+        "Noto Sans Mono CJK JP"
+      ];
+      sansSerif = [
+        "Noto Sans"
+        "Noto Sans CJK JP"
+      ];
+      serif = [
+        "Noto Serif"
+        "Noto Serif CJK JP"
+      ];
+    };
   };
 
   # Enable the OpenSSH daemon.
