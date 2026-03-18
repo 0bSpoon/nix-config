@@ -123,12 +123,14 @@ in {
   programs.vscode = {
     enable = true;
     package = unstable.vscode;
-    extensions = with pkgs.vscode-extensions; [
-      anthropic.claude-code
-      jnoortheen.nix-ide
-    ];
-    userSettings = {
-      "terminal.integrated.sendKeybindingsToShell" = true;
+    profiles.default = {
+      extensions = with pkgs.vscode-extensions; [
+        anthropic.claude-code
+        jnoortheen.nix-ide
+      ];
+      userSettings = {
+        "terminal.integrated.sendKeybindingsToShell" = true;
+      };
     };
   };
 
