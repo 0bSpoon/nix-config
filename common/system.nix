@@ -104,7 +104,7 @@
     nerd-fonts.jetbrains-mono
     ibm-plex
     monaspace
-    nerd-fonts-monaspace
+    nerd-fonts.monaspace
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
