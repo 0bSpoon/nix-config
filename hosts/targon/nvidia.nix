@@ -6,7 +6,7 @@
     modesetting.enable = true;
     open = true;                    # RTX 4070 Ti supports open kernel modules
     package = config.boot.kernelPackages.nvidiaPackages.stable;
-    powerManagement.enable = false; # Desktop, no power management needed
+    powerManagement.enable = true;  # Preserve VRAM on suspend to prevent display corruption
     nvidiaSettings = true;
   };
 
