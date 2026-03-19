@@ -129,8 +129,10 @@ in {
       ];
       userSettings = {
         "terminal.integrated.sendKeybindingsToShell" = true;
-        "editor.fontFamily" = "'Monaspace Neon NF', 'IBM Plex Sans JP', monospace";
-        "terminal.integrated.fontFamily" = "'Monaspace Neon NF', 'IBM Plex Sans JP', monospace";
+        "editor.fontFamily" = "'Monaspace Neon NF', 'IBM Plex Sans JP Text', monospace";
+        "terminal.integrated.fontFamily" = "'Monaspace Neon NF', 'IBM Plex Sans JP Text', monospace";
+        "chat.disableAIFeatures" = true;
+        "workbench.activityBar.location" = "bottom";
       };
     };
   };
