@@ -4,7 +4,7 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    open = true;                    # RTX 4070 Ti supports open kernel modules
+    open = false;                   # Proprietary driver for better suspend/resume stability
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     powerManagement.enable = true;  # Preserve VRAM on suspend to prevent display corruption
     nvidiaSettings = true;
