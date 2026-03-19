@@ -10,36 +10,6 @@
         "kind": "build",
         "isDefault": true
       }
-    },
-    {
-      "label": "Startup Terminals",
-      "dependsOn": ["Claude Code", "Bash"],
-      "runOptions": {
-        "runOn": "folderOpen"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Claude Code",
-      "type": "shell",
-      "command": "claude",
-      "isBackground": true,
-      "problemMatcher": [],
-      "presentation": {
-        "group": "startup",
-        "panel": "dedicated"
-      }
-    },
-    {
-      "label": "Bash",
-      "type": "shell",
-      "command": "",
-      "isBackground": true,
-      "problemMatcher": [],
-      "presentation": {
-        "group": "startup",
-        "panel": "dedicated"
-      }
     }
   ],
   "inputs": [
