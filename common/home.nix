@@ -197,6 +197,13 @@ in {
     type = "fcitx5";
     fcitx5 = {
       addons = [ pkgs.fcitx5-mozc-ut ];
+      settings.globalOptions = {
+        "Hotkey/TriggerKeys"."0" = "Muhenkan";
+        Behavior = {
+          resetStateWhenFocusIn = "All";
+          ShareInputState = "All";
+        };
+      };
       settings.inputMethod = {
         GroupOrder = {
           "0" = "Default";
