@@ -133,9 +133,6 @@ in {
         "terminal.integrated.fontFamily" = "'Monaspace Neon NF', 'IBM Plex Sans JP Text', monospace";
         "chat.disableAIFeatures" = true;
         "terminal.integrated.enablePersistentSessions" = false;
-        "claudeCode.initialPermissionMode" = "acceptEdits";
-        "claudeCode.useTerminal" = true;
-        "claudeCode.useCtrlEnterToSend" = true;
       };
     };
   };
