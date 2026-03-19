@@ -132,6 +132,7 @@ in {
         "editor.fontFamily" = "'Monaspace Neon NF', 'IBM Plex Sans JP Text', monospace";
         "terminal.integrated.fontFamily" = "'Monaspace Neon NF', 'IBM Plex Sans JP Text', monospace";
         "chat.disableAIFeatures" = true;
+        "terminal.integrated.enablePersistentSessions" = false;
       };
     };
   };
