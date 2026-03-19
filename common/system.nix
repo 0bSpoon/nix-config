@@ -83,6 +83,18 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAMxz+IWydEypgGJ3vr5CieUUtL68iw883lSu2Q9+gm6 int47@windows"
     ];
   };
+  
+  security.sudo.extraRules = [
+    {
+      users = [ "bspoon" ];
+      commands = [
+        {
+          command = "/run/current-system/sw/bin/nixos-rebuild";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
 
   programs = {
     firefox.enable = true;

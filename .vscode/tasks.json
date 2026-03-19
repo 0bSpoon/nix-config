@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "nixos-rebuild switch",
+      "type": "shell",
+      "command": "sudo nixos-rebuild switch --flake .#${input:hostname}",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "hostname",
+      "type": "pickString",
+      "description": "ホスト名を選択",
+      "options": ["targon", "vm-nixos-test", "zaun"]
+    }
+  ]
+}
