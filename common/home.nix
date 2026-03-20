@@ -144,9 +144,11 @@ in {
 
   programs.ghostty = {
     enable = true;
+    systemd.enable = true;
     settings = {
       font-family = ["Monaspace Neon NF" "IBM Plex Sans JP"];
       theme = "Kanagawa Wave";
+      window-decoration = "none";
     };
   };
 
