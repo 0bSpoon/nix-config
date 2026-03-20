@@ -162,6 +162,8 @@
     openFirewall = true;
   };
 
+  programs.ssh.systemd-ssh-proxy = false;
+
   
   fileSystems."/var/log".neededForBoot = true;
   fileSystems."/persist".neededForBoot = true;
