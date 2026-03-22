@@ -117,6 +117,8 @@
     ibm-plex
     monaspace
     nerd-fonts.monaspace
+    commit-mono
+    nerd-fonts.commit-mono
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif

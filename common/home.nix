@@ -35,6 +35,7 @@ in {
 
     # productivity tools
     super-productivity
+    spotify
 
     # archives
     zip
@@ -107,6 +108,9 @@ in {
         defaultBranch = "main";
       };
     };
+    ignores = [
+      ".ai-local/"
+    ];
   };
 
   xdg.autostart.enable = true;
@@ -129,8 +133,8 @@ in {
       ];
       userSettings = {
         "terminal.integrated.sendKeybindingsToShell" = true;
-        "editor.fontFamily" = "'Monaspace Neon NF', 'IBM Plex Sans JP Text', monospace";
-        "terminal.integrated.fontFamily" = "'Monaspace Neon NF', 'IBM Plex Sans JP Text', monospace";
+        "editor.fontFamily" = "'CommitMono Nerd Font', 'IBM Plex Sans JP Text', monospace";
+        "terminal.integrated.fontFamily" = "'CommitMono Nerd Font', 'IBM Plex Sans JP Text', monospace";
         "chat.disableAIFeatures" = true;
         "terminal.integrated.enablePersistentSessions" = false;
       };
@@ -146,10 +150,15 @@ in {
     enable = true;
     systemd.enable = true;
     settings = {
-      font-family = ["Monaspace Neon NF" "IBM Plex Sans JP"];
-      theme = "Kanagawa Wave";
+      font-family = ["CommitMono Nerd Font" "IBM Plex Sans JP"];
+      theme = "Everforest Dark Hard";
       window-decoration = "none";
+      mouse-hide-while-typing = true;
     };
+  };
+
+  programs.spotify-player = {
+    enable = true;
   };
 
   programs.direnv = {
