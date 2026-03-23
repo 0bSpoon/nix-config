@@ -1,11 +1,12 @@
 { config, lib, pkgs, inputs, ... }:
 
-let
-  unstable = import inputs.nixpkgs-unstable {
-    system = pkgs.stdenv.hostPlatform.system;
-    config = pkgs.config;
-  };
-in {
+{
+  imports = [
+    ./gui/obsidian.nix
+    ./gui/vscode.nix
+    ./gui/ghostty.nix
+    ./tui/claude-code.nix
+  ];
   home.username = "bspoon";
   home.homeDirectory = "/home/bspoon";
 
@@ -119,73 +120,12 @@ in {
     autostart = true;
   };
 
-  programs.obsidian = {
-    enable = true;
-    package = unstable.obsidian;
-  };
-
-  home.activation.setupObsidianVault = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    if [ ! -d "$HOME/Documents/main/.git" ]; then
-      run ${pkgs.git}/bin/git clone git@github.com:0bSpoon/obsidian-vault.git "$HOME/Documents/main"
-    fi
-
-    obsidian_config="$HOME/.config/obsidian/obsidian.json"
-    if [ ! -f "$obsidian_config" ]; then
-      run mkdir -p "$(dirname "$obsidian_config")"
-      run cat > "$obsidian_config" << 'OBSJSON'
-    {
-      "vaults": {
-        "main": {
-          "path": "/home/bspoon/Documents/main",
-          "ts": 0,
-          "open": true
-        }
-      }
-    }
-    OBSJSON
-    fi
-  '';
-
-  programs.vscode = {
-    enable = true;
-    package = unstable.vscode;
-    profiles.default = {
-      extensions = with pkgs.vscode-extensions; [
-        anthropic.claude-code
-        jnoortheen.nix-ide
-      ];
-      userSettings = {
-        "terminal.integrated.sendKeybindingsToShell" = true;
-        "editor.fontFamily" = "'CommitMono Nerd Font', 'IBM Plex Sans JP Text', monospace";
-        "terminal.integrated.fontFamily" = "'CommitMono Nerd Font', 'IBM Plex Sans JP Text', monospace";
-        "chat.disableAIFeatures" = true;
-        "terminal.integrated.enablePersistentSessions" = false;
-      };
-    };
-  };
-
-  programs.claude-code = {
-    enable = true;
-    package = unstable.claude-code;
-  };
-
   programs.ssh = {
     enable = true;
     matchBlocks = {
       "github.com" = {
         identityFile = "~/.ssh/github.key";
       };
-    };
-  };
-
-  programs.ghostty = {
-    enable = true;
-    systemd.enable = true;
-    settings = {
-      font-family = ["CommitMono Nerd Font" "IBM Plex Sans JP"];
-      theme = "Everforest Dark Hard";
-      window-decoration = "none";
-      mouse-hide-while-typing = true;
     };
   };
 
