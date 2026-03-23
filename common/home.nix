@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let
   unstable = import inputs.nixpkgs-unstable {
@@ -122,11 +122,29 @@ in {
   programs.obsidian = {
     enable = true;
     package = unstable.obsidian;
-    vaults.main  = {
-      enable = true;
-      target = "Documents/main";
-    };
   };
+
+  home.activation.setupObsidianVault = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    if [ ! -d "$HOME/Documents/main/.git" ]; then
+      run ${pkgs.git}/bin/git clone git@github.com:0bSpoon/obsidian-vault.git "$HOME/Documents/main"
+    fi
+
+    obsidian_config="$HOME/.config/obsidian/obsidian.json"
+    if [ ! -f "$obsidian_config" ]; then
+      run mkdir -p "$(dirname "$obsidian_config")"
+      run cat > "$obsidian_config" << 'OBSJSON'
+    {
+      "vaults": {
+        "main": {
+          "path": "/home/bspoon/Documents/main",
+          "ts": 0,
+          "open": true
+        }
+      }
+    }
+    OBSJSON
+    fi
+  '';
 
   programs.vscode = {
     enable = true;
@@ -149,6 +167,15 @@ in {
   programs.claude-code = {
     enable = true;
     package = unstable.claude-code;
+  };
+
+  programs.ssh = {
+    enable = true;
+    matchBlocks = {
+      "github.com" = {
+        identityFile = "~/.ssh/github.key";
+      };
+    };
   };
 
   programs.ghostty = {
