@@ -4,7 +4,7 @@
     ./hardware-configuration.nix
     ../../common/system.nix
     ./disk-config.nix
-    ./nvidia.nix
+    ./gpu.nix
     ./dualboot.nix
   ];
   networking.hostName = "targon";
