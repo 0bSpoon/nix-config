@@ -121,6 +121,11 @@ in {
 
   programs.obsidian = {
     enable = true;
+    package = unstable.obsidian;
+    vaults.main  = {
+      enable = true;
+      target = "Documents/main";
+    };
   };
 
   programs.vscode = {
