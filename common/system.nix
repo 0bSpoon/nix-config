@@ -32,14 +32,20 @@
     LC_TIME = "ja_JP.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # Login manager
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd niri-session";
+        user = "greeter";
+      };
+    };
+  };
 
-  # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
+  programs.niri.enable = true;
 
-  # Configure keymap in X11
+  # Configure keymap
   services.xserver.xkb = {
     layout = "us";
     variant = "";

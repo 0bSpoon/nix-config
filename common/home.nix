@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./desktop
     ./gui/obsidian.nix
     ./gui/vscode.nix
     ./gui/ghostty.nix
