@@ -8,6 +8,13 @@
     nautilus # file manager, required for file chooser dialogs
   ];
 
+  home.pointerCursor = {
+    name = "everforest-cursors";
+    package = pkgs.everforest-cursors;
+    size = 24;
+    gtk.enable = true;
+  };
+
   xdg.configFile."niri/config.kdl".source = ./niri/config.kdl;
 
   xdg.portal = {
