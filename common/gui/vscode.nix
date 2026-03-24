@@ -1,14 +1,9 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
-let
-  unstable = import inputs.nixpkgs-unstable {
-    system = pkgs.stdenv.hostPlatform.system;
-    config = pkgs.config;
-  };
-in {
+{
   programs.vscode = {
     enable = true;
-    package = unstable.vscode;
+    package = pkgs.vscode;
     profiles.default = {
       extensions = with pkgs.vscode-extensions; [
         anthropic.claude-code

@@ -1,5 +1,7 @@
 # NixOS Flake + Home Manager で unstable パッケージを使う方法
 
+> **Note:** 現在はリポジトリ全体が `nixos-unstable` を使用しているため、このパターンは不要。参考資料として保持。
+
 ## 概要
 
 安定版チャネルをベースにしつつ、一部のパッケージだけ unstable から取得するパターン。

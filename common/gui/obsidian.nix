@@ -1,12 +1,7 @@
-{ lib, pkgs, inputs, ... }:
+{ lib, pkgs, ... }:
 
-let
-  unstable = import inputs.nixpkgs-unstable {
-    system = pkgs.stdenv.hostPlatform.system;
-    config = pkgs.config;
-  };
-in {
-  home.packages = [ unstable.obsidian ];
+{
+  home.packages = [ pkgs.obsidian ];
 
   home.activation.cloneObsidianVault = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     if [ ! -d "$HOME/Documents/main/.git" ]; then
