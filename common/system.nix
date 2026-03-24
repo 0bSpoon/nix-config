@@ -45,6 +45,10 @@
 
   programs.niri.enable = true;
 
+  # Secret portal (password storage API), auto-unlock on login
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.greetd.enableGnomeKeyring = true;
+
   # Configure keymap
   services.xserver.xkb = {
     layout = "us";
