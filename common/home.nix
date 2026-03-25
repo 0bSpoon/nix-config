@@ -7,6 +7,7 @@
     ./gui/vscode.nix
     ./gui/ghostty.nix
     ./tui/claude-code.nix
+    ./tui/tmux
   ];
   home.username = "bspoon";
   home.homeDirectory = "/home/bspoon";
@@ -138,10 +139,6 @@
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-  };
-
-  programs.tmux = {
-    enable = true;
   };
 
   programs.google-chrome = {
