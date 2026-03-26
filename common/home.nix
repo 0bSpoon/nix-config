@@ -166,6 +166,7 @@
       ll = "ls -alh --color=auto";
       la = "ls -A --color=auto";
       l = "ls -CF --color=auto";
+      cc = "env -u TMUX claude";
     };
   };
 
