@@ -11,7 +11,7 @@
     keyMode = "vi";
 
     extraConfig = ''
-      set -ga terminal-overrides ",*256col*:Tc"
+      set -as terminal-features ",xterm-ghostty:RGB"
       set -g focus-events on
       set -g set-clipboard on
 
