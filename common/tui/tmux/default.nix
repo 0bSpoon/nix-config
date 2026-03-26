@@ -12,6 +12,7 @@
 
     extraConfig = ''
       set -as terminal-features ",xterm-ghostty:RGB"
+      set-environment -g COLORTERM truecolor
       set -g focus-events on
       set -g set-clipboard on
 
