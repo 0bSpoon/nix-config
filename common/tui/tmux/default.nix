@@ -12,6 +12,8 @@
 
     extraConfig = ''
       set -as terminal-features ",xterm-ghostty:RGB"
+      set -as terminal-features ",xterm*:extkeys"
+      set -g extended-keys always
       set -g focus-events on
       set -g set-clipboard on
 
