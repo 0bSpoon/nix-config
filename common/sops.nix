@@ -6,11 +6,11 @@
   imports = [ inputs.sops-nix.nixosModules.sops ];
 
   # ユーザー管理の age キー（KeePass 等にバックアップ）
-  # 配置先: /etc/sops/age/keys.txt (root:root, 0600)
-  sops.age.keyFile = "/etc/sops/age/keys.txt";
+  # sops CLI と共通: ~/.config/sops/age/keys.txt (0600)
+  sops.age.keyFile = "/home/bspoon/.config/sops/age/keys.txt";
 
-  # ユーザー共通シークレット（github.com/0bSpoon/nix-secrets）
-  sops.defaultSopsFile = "${inputs.nix-secrets}/secrets/common/user-bspoon.yaml";
+  # ユーザー共通シークレット
+  sops.defaultSopsFile = ../secrets/common/user-bspoon.yaml;
 
   sops.secrets = {
     # GitHub SSH 秘密鍵

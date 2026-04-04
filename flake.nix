@@ -15,14 +15,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-secrets = {
-      url = "git+ssh://git@github.com/0bSpoon/nix-secrets";
-      flake = false;
-    };
   };
 
   outputs =
-    { self, nixpkgs, disko, home-manager, sops-nix, nix-secrets, ... }@inputs:
+    { self, nixpkgs, disko, home-manager, sops-nix, ... }@inputs:
     let
       homeManagerModule = {
         home-manager.useGlobalPkgs = true;

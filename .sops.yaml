@@ -1,0 +1,21 @@
+keys:
+  # ユーザーキー（age-keygen で生成し KeePass 等に保存）
+  # 取得方法: nix shell nixpkgs#age --command age-keygen
+  # 秘密鍵の配置先: /etc/sops/age/keys.txt (root:root, 0600)
+  - &user_bspoon age1gzkphg7c8lt2eylvwlxm4h6svcxzprfmjvrrejcj9ehyuzl8u4aqt5se9r
+
+  # 新ホスト追加時の記載例:
+  # - &host_zaun age1...
+
+creation_rules:
+  # ユーザー共通シークレット
+  - path_regex: secrets/common/.*\.yaml$
+    key_groups:
+      - age:
+          - *user_bspoon
+
+  # targon 固有シークレット
+  - path_regex: secrets/hosts/targon/.*\.yaml$
+    key_groups:
+      - age:
+          - *user_bspoon
