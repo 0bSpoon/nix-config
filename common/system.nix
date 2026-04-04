@@ -4,6 +4,8 @@
 { config, pkgs, ... }:
 
 {
+  imports = [ ../overlays/workarounds.nix ];
+
   nix.settings.experimental-features = [ "flakes" "nix-command" ];
 
   # Bootloader.
