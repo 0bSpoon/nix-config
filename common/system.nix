@@ -4,7 +4,10 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../overlays/workarounds.nix ];
+  imports = [
+    ../overlays/workarounds.nix
+    ./sops.nix
+  ];
 
   nix.settings.experimental-features = [ "flakes" "nix-command" ];
 
@@ -85,7 +88,7 @@
     ];
   };
 
-  # Define a user account. Don't forget to set a password with 'passwd'.
+  # Define a user account. Password is managed by sops (common/sops.nix).
   users.users.bspoon = {
     isNormalUser = true;
     description = "Taiki Matsumoto";
@@ -95,6 +98,15 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAMxz+IWydEypgGJ3vr5CieUUtL68iw883lSu2Q9+gm6 int47@windows"
     ];
   };
+
+  # Keep the root account present but disable password-based login locally as well.
+  users.users.root.hashedPassword = "!";
+
+  # `users.mutableUsers = true` does not reset existing passwords, so lock root
+  # explicitly on every activation to ensure the current machine is updated.
+  system.activationScripts.lockRootPassword.text = ''
+    ${pkgs.shadow}/bin/usermod -p '!' root
+  '';
   
   security.sudo.extraRules = [
     {

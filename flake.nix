@@ -24,7 +24,7 @@
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = { inherit inputs; };
-        home-manager.users.bspoon = import ./common/home.nix;
+        home-manager.sharedModules = [ sops-nix.homeManagerModules.sops ];
       };
     in
     {
@@ -34,7 +34,9 @@
           ./hosts/vm-nixos-test/configuration.nix
           disko.nixosModules.disko
           home-manager.nixosModules.home-manager
+          sops-nix.nixosModules.sops
           homeManagerModule
+          { home-manager.users.bspoon = import ./common/home.nix; }
         ];
       };
 
@@ -44,8 +46,9 @@
           ./hosts/targon/configuration.nix
           disko.nixosModules.disko
           home-manager.nixosModules.home-manager
+          sops-nix.nixosModules.sops
           homeManagerModule
-          ./common/sops.nix
+          { home-manager.users.bspoon = import ./common/home.nix; }
         ];
       };
     };

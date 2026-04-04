@@ -8,6 +8,7 @@
     ./gui/ghostty.nix
     ./tui/claude-code.nix
     ./tui/tmux
+    ./sops-hm.nix
   ];
   home.username = "bspoon";
   home.homeDirectory = "/home/bspoon";
@@ -127,7 +128,7 @@
     enableDefaultConfig = false;
     matchBlocks = {
       "github.com" = {
-        identityFile = "/run/secrets/github_ssh_private_key";
+        identityFile = "~/.ssh/github_key";
       };
     };
   };
@@ -150,6 +151,10 @@
   };
 
   programs.fzf = {
+    enable = true;
+  };
+
+  programs.yazi = {
     enable = true;
   };
 

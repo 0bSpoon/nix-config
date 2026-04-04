@@ -1,29 +1,17 @@
 # NixOS sops 共通設定
-# 新しいユーザー共通シークレットは sops.secrets に追記する
-# ホスト固有シークレットは hosts/<name>/sops.nix に追記する
-{ inputs, config, ... }:
+# システム起動時に必要なシークレット（ログイン前に展開される）
+# ホスト固有シークレットは hosts/<name>/sops.nix に追加する
+{ config, ... }:
 {
-  imports = [ inputs.sops-nix.nixosModules.sops ];
-
-  # ユーザー管理の age キー（KeePass 等にバックアップ）
-  # sops CLI と共通: ~/.config/sops/age/keys.txt (0600)
+  # ユーザー管理の age キー（home-manager sops と同じキーファイルを共有）
   sops.age.keyFile = "/home/bspoon/.config/sops/age/keys.txt";
 
-  # ユーザー共通シークレット
-  sops.defaultSopsFile = ../secrets/common/user-bspoon.yaml;
+  sops.defaultSopsFile = ../secrets/secrets.yaml;
 
   sops.secrets = {
-    # GitHub SSH 秘密鍵
-    # 展開先: /run/secrets/github_ssh_private_key (tmpfs, 起動後のみ存在)
-    github_ssh_private_key = {
-      owner = "bspoon";
-      mode = "0600";
-    };
-
-    # 新しいシークレット追加例:
-    # some_api_key = {
-    #   owner = "bspoon";
-    #   mode = "0400";
-    # };
+    # bspoon ユーザーのハッシュ済みパスワード
+    user_password.neededForUsers = true;
   };
+
+  users.users.bspoon.hashedPasswordFile = config.sops.secrets.user_password.path;
 }
