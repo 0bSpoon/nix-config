@@ -127,7 +127,7 @@
     enableDefaultConfig = false;
     matchBlocks = {
       "github.com" = {
-        identityFile = "~/.ssh/github.key";
+        identityFile = "/run/secrets/github_ssh_private_key";
       };
     };
   };
