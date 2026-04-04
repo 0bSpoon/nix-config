@@ -7,7 +7,7 @@
 #
 # 新しいワークアラウドの追加例:
 #   (final: prev:
-#     let pkgs-pinned = mkPinnedPkgs { rev = "abc123..."; sha256 = "0xxx..."; } prev.system;
+#     let pkgs-pinned = mkPinnedPkgs { rev = "abc123..."; sha256 = "0xxx..."; } prev.stdenv.hostPlatform.system;
 #     in { some-package = pkgs-pinned.some-package; })
 #
 # sha256 の取得方法:
@@ -39,7 +39,7 @@ in
         pkgs-pinned = mkPinnedPkgs {
           rev = "6c9a78c09ff4d6c21d0319114873508a6ec01655";
           sha256 = "0szij1c0cl4xvjhzb0cwvskkl54dyw11skb9hgmnhamcmmsm6bji";
-        } prev.system;
+        } prev.stdenv.hostPlatform.system;
       in
       {
         claude-code = pkgs-pinned.claude-code;

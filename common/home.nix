@@ -157,6 +157,7 @@
 
   programs.yazi = {
     enable = true;
+    shellWrapperName = "yy";
   };
 
   programs.bash = {
