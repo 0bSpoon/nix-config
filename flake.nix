@@ -11,10 +11,18 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-secrets = {
+      url = "git+ssh://git@github.com/0bSpoon/nix-secrets";
+      flake = false;
+    };
   };
 
   outputs =
-    { self, nixpkgs, disko, home-manager, ... }@inputs:
+    { self, nixpkgs, disko, home-manager, sops-nix, nix-secrets, ... }@inputs:
     let
       homeManagerModule = {
         home-manager.useGlobalPkgs = true;
@@ -41,6 +49,7 @@
           disko.nixosModules.disko
           home-manager.nixosModules.home-manager
           homeManagerModule
+          ./common/sops.nix
         ];
       };
     };
