@@ -143,10 +143,6 @@
   };
 
 
-  programs.noctalia-shell = {
-    enable = true;
-  };
-
   programs.google-chrome = {
     enable = true;
   };

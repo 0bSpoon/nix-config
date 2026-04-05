@@ -6,6 +6,7 @@
     fuzzel # app launcher
     wl-clipboard # clipboard manager
     nautilus # file manager, required for file chooser dialogs
+    noctalia-shell
   ];
 
   home.pointerCursor = {
