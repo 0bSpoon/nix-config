@@ -30,7 +30,8 @@
       bind -n S-Enter send-keys Escape "[13;2u"
 
       # === ペイン操作 ===
-      # 分割 (カレントディレクトリを引き継ぐ)
+      # 分割・新規ウィンドウ (カレントディレクトリを引き継ぐ)
+      bind c new-window -c "#{pane_current_path}"
       bind | split-window -h -c "#{pane_current_path}"
       bind - split-window -v -c "#{pane_current_path}"
 
