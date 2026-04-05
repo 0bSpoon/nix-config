@@ -34,11 +34,7 @@
     # feel free to add your own or remove some of them
     fastfetch # fastfetch is a system information tool similar to neofetch
 
-    # gnome related
-    gnome-tweaks
-
     # productivity tools
-    super-productivity
     spotify
 
     # archives
@@ -151,6 +147,10 @@
     enable = true;
   };
 
+  programs.lazygit = {
+    enable = true;
+  };
+
   programs.fzf = {
     enable = true;
   };
@@ -160,6 +160,13 @@
     shellWrapperName = "yy";
   };
 
+  programs.codex = {
+    enable = true;
+  };
+
+  programs.opencode = {
+   enable = true;
+  };
   programs.bash = {
     enable = true;
     enableCompletion = true;
@@ -174,6 +181,7 @@
       la = "ls -A --color=auto";
       l = "ls -CF --color=auto";
       cc = "env -u TMUX claude";
+      ccd = "env -u TMUX claude --dangerously-skip-permissions";
     };
   };
 

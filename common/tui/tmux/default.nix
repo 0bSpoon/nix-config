@@ -12,9 +12,6 @@
 
     extraConfig = ''
       set -as terminal-features ",xterm-ghostty:RGB"
-      set -as terminal-features ",xterm*:extkeys"
-      set -g extended-keys always
-      set -g extended-keys-format csi-u
       set -g focus-events on
       set -g set-clipboard on
 
@@ -28,6 +25,9 @@
       bind-key -T copy-mode-vi C-v send -X rectangle-toggle
       bind-key -T copy-mode-vi y send -X copy-pipe-and-cancel "${pkgs.wl-clipboard}/bin/wl-copy"
       bind-key -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel "${pkgs.wl-clipboard}/bin/wl-copy"
+
+      # Shift+Enter を改行キーとしてアプリケーションへ渡す
+      bind -n S-Enter send-keys Escape "[13;2u"
 
       # === ペイン操作 ===
       # 分割 (カレントディレクトリを引き継ぐ)
