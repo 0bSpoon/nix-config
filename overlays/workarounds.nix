@@ -34,21 +34,21 @@ in
     # [workaround] claude-code 2.1.88 が npm に存在しないバグ
     # 削除条件: nixpkgs が claude-code を有効なバージョンに更新したとき
     # 固定コミット: nixpkgs 6c9a78c (claude-code 2.1.80 を含む)
-    (final: prev:
-      let
-        pkgs-pinned = mkPinnedPkgs {
-          rev = "6c9a78c09ff4d6c21d0319114873508a6ec01655";
-          sha256 = "0szij1c0cl4xvjhzb0cwvskkl54dyw11skb9hgmnhamcmmsm6bji";
-        } prev.stdenv.hostPlatform.system;
-      in
-      {
-        claude-code = pkgs-pinned.claude-code;
-        vscode-extensions = prev.vscode-extensions // {
-          anthropic = (prev.vscode-extensions.anthropic or { }) // {
-            claude-code = pkgs-pinned.vscode-extensions.anthropic.claude-code;
-          };
-        };
-      })
+    # (final: prev:
+    #   let
+    #     pkgs-pinned = mkPinnedPkgs {
+    #       rev = "6c9a78c09ff4d6c21d0319114873508a6ec01655";
+    #       sha256 = "0szij1c0cl4xvjhzb0cwvskkl54dyw11skb9hgmnhamcmmsm6bji";
+    #     } prev.stdenv.hostPlatform.system;
+    #   in
+    #   {
+    #     claude-code = pkgs-pinned.claude-code;
+    #     vscode-extensions = prev.vscode-extensions // {
+    #       anthropic = (prev.vscode-extensions.anthropic or { }) // {
+    #         claude-code = pkgs-pinned.vscode-extensions.anthropic.claude-code;
+    #       };
+    #     };
+    #   })
 
   ];
 }
