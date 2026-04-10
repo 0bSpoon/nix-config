@@ -9,13 +9,25 @@ keys:
 
 creation_rules:
   # 共通シークレット
-  - path_regex: secrets/secrets\.yaml$
+  - path_regex: secrets/common\.yaml$
+    key_groups:
+      - age:
+          - *admin
+
+  # ユーザー固有シークレット
+  - path_regex: secrets/users/.*\.yaml$
     key_groups:
       - age:
           - *admin
 
   # ホスト固有シークレット
   - path_regex: secrets/hosts/.*\.yaml$
+    key_groups:
+      - age:
+          - *admin
+
+  # 旧構成の互換ルール
+  - path_regex: secrets/secrets\.yaml$
     key_groups:
       - age:
           - *admin

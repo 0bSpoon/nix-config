@@ -1,8 +1,9 @@
 {
-  description = "nixos book flake";
+  description = "multi-platform home lab flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     disko = {
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,38 +19,56 @@
   };
 
   outputs =
-    { self, nixpkgs, disko, home-manager, sops-nix, ... }@inputs:
+    inputs:
     let
-      homeManagerModule = {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit inputs; };
-        home-manager.sharedModules = [ sops-nix.homeManagerModules.sops ];
+      inventory = {
+        targon = {
+          kind = "nixos";
+          system = "x86_64-linux";
+          username = "bspoon";
+          homeDirectory = "/home/bspoon";
+          hostModule = ./hosts/targon;
+          userModule = ./users/bspoon/home.nix;
+          nixosProfile = ./profiles/nixos/laptop.nix;
+          homeProfile = ./profiles/home/personal-desktop.nix;
+        };
+
+        zaun = {
+          kind = "nixos";
+          system = "x86_64-linux";
+          username = "bspoon";
+          homeDirectory = "/home/bspoon";
+          hostModule = ./hosts/zaun;
+          userModule = ./users/bspoon/home.nix;
+          nixosProfile = ./profiles/nixos/server.nix;
+          homeProfile = ./profiles/home/server-admin.nix;
+        };
+
+        vm-nixos-test = {
+          kind = "nixos";
+          system = "x86_64-linux";
+          username = "bspoon";
+          homeDirectory = "/home/bspoon";
+          hostModule = ./hosts/vm-nixos-test;
+          userModule = ./users/bspoon/home.nix;
+          nixosProfile = ./profiles/nixos/desktop.nix;
+          homeProfile = ./profiles/home/personal-desktop.nix;
+        };
       };
     in
-    {
-      nixosConfigurations.vm-nixos-test = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/vm-nixos-test/configuration.nix
-          disko.nixosModules.disko
-          home-manager.nixosModules.home-manager
-          sops-nix.nixosModules.sops
-          homeManagerModule
-          { home-manager.users.bspoon = import ./common/home.nix; }
-        ];
-      };
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        ./modules/flake-parts/per-system.nix
+        ./modules/flake-parts/hosts.nix
+        ./modules/flake-parts/homes.nix
+        ./modules/flake-parts/android.nix
+      ];
 
-      nixosConfigurations.targon = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/targon/configuration.nix
-          disko.nixosModules.disko
-          home-manager.nixosModules.home-manager
-          sops-nix.nixosModules.sops
-          homeManagerModule
-          { home-manager.users.bspoon = import ./common/home.nix; }
-        ];
-      };
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+
+      flake.inventory = inventory;
     };
 }

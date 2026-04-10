@@ -20,35 +20,42 @@ let
   # 特定の nixpkgs コミットから pkgs セットを生成するヘルパー
   # rev: nixpkgs の git コミットハッシュ
   # sha256: nix hash convert --hash-algo sha256 --to base32 で変換した narHash
-  mkPinnedPkgs = { rev, sha256 }: system: import (builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz";
-    inherit sha256;
-  }) {
-    inherit system;
-    config.allowUnfree = true;
-  };
+  mkPinnedPkgs =
+    { rev, sha256 }:
+    system:
+    import
+      (builtins.fetchTarball {
+        url = "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz";
+        inherit sha256;
+      })
+      {
+        inherit system;
+        config.allowUnfree = true;
+      };
 in
 {
   nixpkgs.overlays = [
 
-    # [workaround] claude-code 2.1.88 が npm に存在しないバグ
-    # 削除条件: nixpkgs が claude-code を有効なバージョンに更新したとき
-    # 固定コミット: nixpkgs 6c9a78c (claude-code 2.1.80 を含む)
-    # (final: prev:
-    #   let
-    #     pkgs-pinned = mkPinnedPkgs {
-    #       rev = "6c9a78c09ff4d6c21d0319114873508a6ec01655";
-    #       sha256 = "0szij1c0cl4xvjhzb0cwvskkl54dyw11skb9hgmnhamcmmsm6bji";
-    #     } prev.stdenv.hostPlatform.system;
-    #   in
-    #   {
-    #     claude-code = pkgs-pinned.claude-code;
-    #     vscode-extensions = prev.vscode-extensions // {
-    #       anthropic = (prev.vscode-extensions.anthropic or { }) // {
-    #         claude-code = pkgs-pinned.vscode-extensions.anthropic.claude-code;
-    #       };
-    #     };
-    #   })
+    # [workaround] vscode-extensions.anthropic.claude-code 2.1.92 の vsix hash が nixpkgs 側で誤っている
+    # 症状: hash mismatch in fixed-output derivation anthropic-claude-code.vsix
+    # 削除条件: nixpkgs が claude-code vscode 拡張の hash を修正したとき
+    # 固定コミット: nixpkgs 6c9a78c (vscode-extensions.anthropic.claude-code が正しくビルドできる版)
+    (
+      final: prev:
+      let
+        pkgs-pinned = mkPinnedPkgs {
+          rev = "6c9a78c09ff4d6c21d0319114873508a6ec01655";
+          sha256 = "0szij1c0cl4xvjhzb0cwvskkl54dyw11skb9hgmnhamcmmsm6bji";
+        } prev.stdenv.hostPlatform.system;
+      in
+      {
+        vscode-extensions = prev.vscode-extensions // {
+          anthropic = (prev.vscode-extensions.anthropic or { }) // {
+            claude-code = pkgs-pinned.vscode-extensions.anthropic.claude-code;
+          };
+        };
+      }
+    )
 
   ];
 }
