@@ -50,7 +50,7 @@ layout {
     struts {}
 }
 
-spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "noctalia-shell"
 
 hotkey-overlay {}
 
