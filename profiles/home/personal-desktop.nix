@@ -5,5 +5,6 @@
     ../../modules/home/dev.nix
     ../../modules/home/desktop.nix
     ../../modules/home/personal.nix
+    ../../modules/home/tui/cli-proxy-api.nix
   ];
 }
