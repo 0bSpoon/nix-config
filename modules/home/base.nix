@@ -25,11 +25,6 @@ in
     shellWrapperName = "yy";
   };
 
-  programs.codex = {
-    enable = true;
-    package = llmAgentsPkgs.codex;
-  };
-
   programs.opencode = {
     enable = true;
     package = llmAgentsPkgs.opencode;

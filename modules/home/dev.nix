@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
+let
+  llmAgentsPkgs = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   imports = [
     ./tui/claude-code.nix
@@ -8,6 +11,7 @@
   home.packages = with pkgs; [
     aria2
     btop
+    llmAgentsPkgs.cli-proxy-api
     cowsay
     dnsutils
     ethtool
