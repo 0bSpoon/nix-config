@@ -1,4 +1,7 @@
-{ homeDirectory, username, ... }:
+{ homeDirectory, inputs, pkgs, username, ... }:
+let
+  llmAgentsPkgs = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   imports = [
     ./sops.nix
@@ -22,8 +25,15 @@
     shellWrapperName = "yy";
   };
 
-  programs.codex.enable = true;
-  programs.opencode.enable = true;
+  programs.codex = {
+    enable = true;
+    package = llmAgentsPkgs.codex;
+  };
+
+  programs.opencode = {
+    enable = true;
+    package = llmAgentsPkgs.opencode;
+  };
 
   programs.bash = {
     enable = true;
