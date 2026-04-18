@@ -40,8 +40,9 @@ in
       ll = "ls -alh --color=auto";
       la = "ls -A --color=auto";
       l = "ls -CF --color=auto";
-      cc = "env -u TMUX claude";
-      ccd = "env -u TMUX claude --dangerously-skip-permissions";
+      cc = "CLAUDE_CODE_TMUX_TRUECOLOR=1 claude";
+      ccc = "CLAUDE_CODE_TMUX_TRUECOLOR=1 ANTHROPIC_BASE_URL=http://127.0.0.1:8317 ANTHROPIC_AUTH_TOKEN=sk-dummy ANTHROPIC_DEFAULT_OPUS_MODEL='gpt-5.4(high)' ANTHROPIC_DEFAULT_SONNET_MODEL='gpt-5.4(medium)' ANTHROPIC_DEFAULT_HAIKU_MODEL='gpt-5.4(low)' claude";
+      ccd = "CLAUDE_CODE_TMUX_TRUECOLOR=1 claude --dangerously-skip-permissions";
     };
   };
 
