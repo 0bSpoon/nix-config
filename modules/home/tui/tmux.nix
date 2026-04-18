@@ -42,6 +42,8 @@
       bind -r M-Right resize-pane -R 5
 
       set -g mode-style "bg=#4c3743,fg=#d3c6aa"
+      set -g message-style "bg=#d3c6aa,fg=#1e2326"
+      set -g message-command-style "bg=#d3c6aa,fg=#1e2326"
 
       set -g pane-border-style "fg=colour238"
       set -g pane-active-border-style "fg=cyan"
