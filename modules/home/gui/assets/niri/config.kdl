@@ -10,13 +10,18 @@ input {
         tap
         natural-scroll
     }
-    mouse {}
+    mouse {
+        accel-speed -0.7
+    }
     trackpoint {}
 }
+
+output {}
 
 layout {
     gaps 16
     center-focused-column "never"
+    always-center-single-column
 
     preset-column-widths {
         proportion 0.33333
@@ -28,7 +33,7 @@ layout {
 
     focus-ring {
         width 4
-        active-color "#7fc8ff"
+        active-color "#A7C080"
         inactive-color "#505050"
     }
 
@@ -226,9 +231,9 @@ binds {
     Mod+W { toggle-column-tabbed-display; }
 
     // スクリーンショット
-    Print      { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print  { screenshot-window; }
+    Mod+Shift+S { screenshot; }
+    Ctrl+Print  { screenshot-screen; }
+    Alt+Print   { screenshot-window; }
 
     // システム
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
