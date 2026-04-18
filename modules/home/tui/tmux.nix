@@ -10,7 +10,7 @@
     keyMode = "vi";
 
     extraConfig = ''
-      set -as terminal-features ",xterm-ghostty:RGB"
+      set -as terminal-features ",xterm-ghostty:sync,RGB"
       set -g focus-events on
       set -g set-clipboard on
 
@@ -25,6 +25,8 @@
 
       bind -n S-Enter send-keys Escape "[13;2u"
 
+      bind R source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded"
+
       bind c new-window -c "#{pane_current_path}"
       bind | split-window -h -c "#{pane_current_path}"
       bind - split-window -v -c "#{pane_current_path}"
@@ -38,6 +40,8 @@
       bind -r M-Down resize-pane -D 5
       bind -r M-Up resize-pane -U 5
       bind -r M-Right resize-pane -R 5
+
+      set -g mode-style "bg=#4c3743,fg=#d3c6aa"
 
       set -g pane-border-style "fg=colour238"
       set -g pane-active-border-style "fg=cyan"
