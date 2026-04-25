@@ -10,6 +10,7 @@
     nerd-fonts.commit-mono
     nerd-fonts.jetbrains-mono
     nerd-fonts.monaspace
+    nerd-fonts.blex-mono
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
