@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  theme = "flexoki-dark";
+  theme = "rose-pine-main";
 
   schemes = {
     flexoki-dark = ./schemes/flexoki-dark.yaml;
