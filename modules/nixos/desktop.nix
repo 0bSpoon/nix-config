@@ -10,7 +10,12 @@
     };
   };
 
-  programs.niri.enable = true;
+  niri-flake.cache.enable = false;
+
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri;
+  };
   programs.firefox.enable = true;
 
   services.gnome.gnome-keyring.enable = true;

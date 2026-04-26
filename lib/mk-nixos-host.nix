@@ -27,6 +27,7 @@ inputs.nixpkgs.lib.nixosSystem {
   modules = [
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
+    inputs.niri.nixosModules.niri
     inputs.stylix.nixosModules.stylix
     inputs.sops-nix.nixosModules.sops
     ../modules/theme/stylix.nix
@@ -46,7 +47,11 @@ inputs.nixpkgs.lib.nixosSystem {
           homeDirectory
           ;
       };
-      home-manager.sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
+      home-manager.sharedModules = [
+        inputs.sops-nix.homeManagerModules.sops
+        inputs.dms.homeModules.dank-material-shell
+        inputs.dms.homeModules.niri
+      ];
       home-manager.users = lib.optionalAttrs (homeProfile != null && userModule != null) {
         "${username}" = {
           imports = [

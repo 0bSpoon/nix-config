@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./gui/niri.nix
     ./gui/vscode.nix
     ./gui/ghostty.nix
   ];
@@ -8,8 +9,6 @@
   home.packages = with pkgs; [
     fuzzel
     nautilus
-    noctalia-shell
-    quickshell
     wl-clipboard
     xwayland-satellite
   ];
@@ -21,9 +20,6 @@
     gtk.enable = true;
   };
 
-  xdg.autostart.enable = true;
-  xdg.configFile."niri/config.kdl".source = ./gui/assets/niri/config.kdl;
-
   xdg.portal = {
     enable = true;
     extraPortals = [
@@ -34,21 +30,6 @@
       "gnome"
       "gtk"
     ];
-  };
-
-  services.mako.enable = true;
-
-  systemd.user.services.polkit-kde-agent = {
-    Unit = {
-      Description = "PolicyKit Authentication Agent";
-      After = [ "graphical-session.target" ];
-      PartOf = [ "graphical-session.target" ];
-    };
-    Service = {
-      ExecStart = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1";
-      Restart = "on-failure";
-    };
-    Install.WantedBy = [ "graphical-session.target" ];
   };
 
   programs.keepassxc = {
