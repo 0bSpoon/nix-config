@@ -53,7 +53,7 @@
 
   programs.keepassxc = {
     enable = true;
-    autostart = true;
+    autostart = false;
   };
 
   programs.google-chrome.enable = true;
