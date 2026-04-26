@@ -5,7 +5,6 @@
     package = pkgs.vscode;
     profiles.default = {
       extensions = with pkgs.vscode-extensions; [
-        anthropic.claude-code
         jnoortheen.nix-ide
       ];
       userSettings = {
