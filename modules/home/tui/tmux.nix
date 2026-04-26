@@ -1,7 +1,5 @@
 { pkgs, ... }:
 {
-  stylix.targets.tmux.enable = true;
-
   programs.tmux = {
     enable = true;
     terminal = "tmux-256color";

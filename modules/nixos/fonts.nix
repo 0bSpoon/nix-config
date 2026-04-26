@@ -28,19 +28,5 @@
       rgba = "rgb";
       lcdfilter = "default";
     };
-    defaultFonts = {
-      monospace = [
-        "Noto Sans Mono"
-        "Noto Sans Mono CJK JP"
-      ];
-      sansSerif = [
-        "Noto Sans"
-        "Noto Sans CJK JP"
-      ];
-      serif = [
-        "Noto Serif"
-        "Noto Serif CJK JP"
-      ];
-    };
   };
 }

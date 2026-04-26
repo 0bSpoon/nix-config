@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 let
   theme = "flexoki-dark";
 
@@ -11,8 +11,26 @@ in
 {
   stylix = {
     enable = true;
-    autoEnable = false;
+    autoEnable = true;
     polarity = "dark";
     base16Scheme = schemes.${theme};
+    fonts = {
+      monospace = {
+        package = pkgs.nerd-fonts.blex-mono;
+        name = "BlexMono Nerd Font";
+      };
+      sansSerif = {
+        package = pkgs.ibm-plex;
+        name = "IBM Plex Sans JP Text";
+      };
+      serif = {
+        package = pkgs.noto-fonts-cjk-serif;
+        name = "Noto Serif CJK JP";
+      };
+      emoji = {
+        package = pkgs.noto-fonts-color-emoji;
+        name = "Noto Color Emoji";
+      };
+    };
   };
 }

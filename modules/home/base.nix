@@ -1,4 +1,4 @@
-{ homeDirectory, inputs, pkgs, username, ... }:
+{ config, homeDirectory, inputs, pkgs, username, ... }:
 let
   llmAgentsPkgs = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
 in
@@ -10,6 +10,8 @@ in
   home.username = username;
   home.homeDirectory = homeDirectory;
   home.stateVersion = "25.11";
+
+  gtk.gtk4.theme = config.gtk.theme;
 
   programs.direnv = {
     enable = true;
