@@ -30,7 +30,7 @@ layout {
     default-column-width { proportion 0.5; }
 
     focus-ring {
-        width 4
+        width 2
         active-color "#A7C080"
         inactive-color "#505050"
     }
@@ -44,10 +44,13 @@ layout {
     }
 
     shadow {
-        softness 30
-        spread 5
-        offset x=0 y=5
-        color "#0007"
+        on
+        softness 20
+        spread 8
+        offset x=0 y=8
+        draw-behind-window true
+        color "#000000b0"
+        inactive-color "#00000080"
     }
 
     struts {}
@@ -210,9 +213,9 @@ binds {
     Mod+R       { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R  { reset-window-height; }
-    Mod+Z       { maximize-column; }
+    Mod+Z       { maximize-window-to-edges; }
     Mod+Shift+Z { fullscreen-window; }
-    Mod+Ctrl+Z  { expand-column-to-available-width; }
+    Mod+Alt+Z  { expand-column-to-available-width; }
     Mod+C       { center-column; }
     Mod+Ctrl+C  { center-visible-columns; }
 
