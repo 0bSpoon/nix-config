@@ -1,14 +1,18 @@
 { ... }:
 {
+  stylix.targets.ghostty = {
+    enable = true;
+    fonts.enable = false;
+  };
+
   programs.ghostty = {
     enable = true;
     systemd.enable = true;
     settings = {
       font-family = [
-        "CommitMono Nerd Font"
+        "BlexMono Nerd Font"
         "IBM Plex Sans JP"
       ];
-      theme = "Everforest Dark Hard";
       window-decoration = "none";
       mouse-hide-while-typing = true;
     };

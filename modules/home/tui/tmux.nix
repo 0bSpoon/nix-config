@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  stylix.targets.tmux.enable = true;
+
   programs.tmux = {
     enable = true;
     terminal = "tmux-256color";
@@ -41,19 +43,12 @@
       bind -r M-Up resize-pane -U 5
       bind -r M-Right resize-pane -R 5
 
-      set -g mode-style "bg=#4c3743,fg=#d3c6aa"
-      set -g message-style "bg=#d3c6aa,fg=#1e2326"
-      set -g message-command-style "bg=#d3c6aa,fg=#1e2326"
-
-      set -g pane-border-style "fg=colour238"
-      set -g pane-active-border-style "fg=cyan"
       set -g pane-border-lines heavy
       set -g pane-border-status top
       set -g pane-border-format " #{pane_index}: #{pane_current_command} "
       set -g pane-border-indicators off
 
       set -g status-position bottom
-      set -g status-style "bg=default,fg=white"
       set -g status-left "#[bold]#S "
       set -g status-right "%H:%M"
       set -g status-left-length 20

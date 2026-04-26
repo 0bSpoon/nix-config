@@ -27,7 +27,9 @@ inputs.nixpkgs.lib.nixosSystem {
   modules = [
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
+    inputs.stylix.nixosModules.stylix
     inputs.sops-nix.nixosModules.sops
+    ../modules/theme/stylix.nix
     nixosProfile
     hostModule
     {

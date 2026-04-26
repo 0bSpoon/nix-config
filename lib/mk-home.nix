@@ -15,7 +15,9 @@ inputs.home-manager.lib.homeManagerConfiguration {
   };
 
   modules = [
+    inputs.stylix.homeModules.stylix
     inputs.sops-nix.homeManagerModules.sops
+    ../modules/theme/stylix.nix
     host.userModule
     host.homeProfile
   ];
